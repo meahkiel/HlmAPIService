@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PMV.PmvApiService.Core.BaseEntity;
+namespace PMV.Core.BaseEntity;
 
 public abstract class ValueObject
 {
@@ -18,7 +13,7 @@ public abstract class ValueObject
 
     protected static bool NotEqualOperator(ValueObject left, ValueObject right)
     {
-        return !(EqualOperator(left, right));
+        return !EqualOperator(left, right);
     }
 
     protected abstract IEnumerable<object> GetEqualityComponents();
@@ -32,7 +27,7 @@ public abstract class ValueObject
 
         var other = (ValueObject)obj;
 
-        return this.GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
+        return GetEqualityComponents().SequenceEqual(other.GetEqualityComponents());
     }
 
     public override int GetHashCode()

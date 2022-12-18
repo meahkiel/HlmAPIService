@@ -1,7 +1,6 @@
-using PMV.PmvApiService.Core.FuelLogs;
-using PMV.PmvApiService.Core.Interfaces;
+using PMV.Core.Interfaces;
 
-namespace PmvApiService.Core.FuelLogs
+namespace PMV.Core.FuelLogs
 {
     public interface ILogSheetRepository : IRepository<LogSheet>
     {

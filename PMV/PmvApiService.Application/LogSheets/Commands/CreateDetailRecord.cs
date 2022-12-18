@@ -1,12 +1,12 @@
 using MediatR;
-using PMV.PmvApiService.Core.FuelLogs;
-using PmvApiService.Application.Common.Exceptions.FuelExceptions;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.LogSheets.DTO;
 using Microsoft.EntityFrameworkCore;
+using PMV.Application.Interfaces;
+using Shared.Core;
+using PMV.Application.Common.Exceptions.FuelExceptions;
+using PMV.Application.LogSheets.DTO;
+using PMV.Core.FuelLogs;
 
-namespace PMV.PmvApiService.Application.LogSheets.Commands;
+namespace PMV.Application.LogSheets.Commands;
 
 public class CreateDetailRecord
 {
@@ -22,17 +22,18 @@ public class CreateDetailRecord
 
         }
 
-        public bool FieldValidation(Command request) {
+        public bool FieldValidation(Command request)
+        {
 
-             if(string.IsNullOrEmpty(request.request.AssetCode))
+            if (string.IsNullOrEmpty(request.request.AssetCode))
                 throw new Exception("Asset Code must have a value");
 
-            if(request.request.Reading == 0)
+            if (request.request.Reading == 0)
                 throw new Exception("Reading must have a value");
-            
-            if(request.request.Quantity == 0)
+
+            if (request.request.Quantity == 0)
                 throw new Exception("Quantity must have a value");
-            
+
             return true;
         }
 
@@ -46,7 +47,7 @@ public class CreateDetailRecord
 
                 //get the logsheet
                 LogSheet logsheet = await GetActiveLogSheet(request);
-                
+
                 LogSheetDetail previousRecord = await GetPreviousRecord(request);
 
                 logsheet.AddDetail(LogSheetDetail.Create(
@@ -65,7 +66,8 @@ public class CreateDetailRecord
 
                 await _context.SaveChangesAsyncRoot();
                 var logDetail = logsheet.Details.FirstOrDefault() ?? new LogSheetDetail();
-                return Result<LogSheetDetailResponse>.Success(new LogSheetDetailResponse {
+                return Result<LogSheetDetailResponse>.Success(new LogSheetDetailResponse
+                {
                     Id = logDetail.Id.ToString(),
                     AssetCode = logDetail.AssetCode,
                     FuelTime = logDetail.FuelTime,
@@ -87,14 +89,15 @@ public class CreateDetailRecord
         private async Task<LogSheetDetail> GetPreviousRecord(Command request)
         {
 
-           
+
             //check the previous record
             var previousRecord = await _context.GetContext()
                                     .LogSheetDetails.Where(d => d.AssetCode == request.request.AssetCode)
                                     .OrderByDescending(l => l.LogSheet.CreatedAt)
                                     .FirstOrDefaultAsync() ?? new LogSheetDetail();
 
-            if (request.request.Reading < previousRecord.Reading) {
+            if (request.request.Reading < previousRecord.Reading)
+            {
                 throw new ReadingException();
             }
 

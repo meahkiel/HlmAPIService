@@ -1,17 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\PmvApiService.Core\PmvApiService.Core.csproj" />
-    <ProjectReference Include="..\PMVApiService.SupportContext\PMVApiService.SupportContext.csproj" />
-    <ProjectReference Include="..\PmvApiService.Persistence\PmvApiService.Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\PmvApiService.Core\PMV.Core.csproj" />
+    <ProjectReference Include="..\PmvApiService.Persistence\PMV.Persistence.csproj" />
+    <ProjectReference Include="..\PmvApiService.SupportContext\PMV.SupportContext.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,10 +1,10 @@
 using MediatR;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.LogSheets.DTO;
-using PMV.PmvApiService.Core.FuelLogs;
+using PMV.Application.Interfaces;
+using PMV.Application.LogSheets.DTO;
+using PMV.Core.FuelLogs;
+using Shared.Core;
 
-namespace PMV.PmvApiService.Application.LogSheets.Queries
+namespace PMV.Application.LogSheets.Queries
 {
     public class GetSingleLogSheet
     {
@@ -20,11 +20,14 @@ namespace PMV.PmvApiService.Application.LogSheets.Queries
 
             }
 
-            private IEnumerable<LogSheetDetailResponse> ExtractDetail(IEnumerable<LogSheetDetail> details) {
+            private IEnumerable<LogSheetDetailResponse> ExtractDetail(IEnumerable<LogSheetDetail> details)
+            {
                 var responses = new List<LogSheetDetailResponse>();
-                
-                foreach(var detail in details) {
-                    responses.Add(new LogSheetDetailResponse {
+
+                foreach (var detail in details)
+                {
+                    responses.Add(new LogSheetDetailResponse
+                    {
                         Id = detail.Id.ToString(),
                         LogSheetId = detail.LogSheet.Id.ToString(),
                         AssetCode = detail.AssetCode,
@@ -42,13 +45,14 @@ namespace PMV.PmvApiService.Application.LogSheets.Queries
 
             public async Task<Result<LogSheetResponse>> Handle(Query request, CancellationToken cancellationToken)
             {
-                try {
-                    var logsheet  = await _context.LogSheets.GetByIdAsync(Guid.Parse(request.Id));
-                    
-                    if(logsheet == null) 
+                try
+                {
+                    var logsheet = await _context.LogSheets.GetByIdAsync(Guid.Parse(request.Id));
+
+                    if (logsheet == null)
                         throw new Exception("Cannot find Logsheet");
-                    
-                    return Result<LogSheetResponse>.Success(new LogSheetResponse 
+
+                    return Result<LogSheetResponse>.Success(new LogSheetResponse
                     {
                         Id = logsheet.Id.ToString(),
                         ReferenceNo = logsheet.ReferenceNo,
@@ -66,7 +70,8 @@ namespace PMV.PmvApiService.Application.LogSheets.Queries
                         Details = ExtractDetail(logsheet.Details).ToList()
                     });
                 }
-                catch(Exception ex) {
+                catch (Exception ex)
+                {
                     return Result<LogSheetResponse>.Failure(ex.Message);
                 }
 

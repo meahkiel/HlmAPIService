@@ -1,4 +1,4 @@
-namespace PMV.PmvApiService.Core.Interfaces;
+namespace PMV.Core.Interfaces;
 
 public interface IRepository<T> : IDisposable where T : class
 {
@@ -7,5 +7,5 @@ public interface IRepository<T> : IDisposable where T : class
 
     Task<T?> GetByIdAsync(Guid Id);
     Task<IEnumerable<T>> GetAll();
-    
+
 }

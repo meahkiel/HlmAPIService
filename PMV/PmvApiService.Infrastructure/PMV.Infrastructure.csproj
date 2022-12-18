@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\PmvApiService.Application\PmvApiService.Application.csproj" />
-    <ProjectReference Include="..\PMVApiService.SupportContext\PMVApiService.SupportContext.csproj" />
+    <ProjectReference Include="..\PmvApiService.Application\PMV.Application.csproj" />
+    <ProjectReference Include="..\PmvApiService.SupportContext\PMV.SupportContext.csproj" />
   </ItemGroup>
 
   <ItemGroup>

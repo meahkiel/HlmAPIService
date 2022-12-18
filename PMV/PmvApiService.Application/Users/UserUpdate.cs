@@ -1,13 +1,13 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
+using PMV.Application.Interfaces;
+using Shared.Core;
 
-namespace PMV.PmvApiService.Application.Users;
+namespace PMV.Application.Users;
 
 public class UserUpdate
 {
-    public record Command(string LVStation,string EmployeeCode) : IRequest<Result<Unit>>;
+    public record Command(string LVStation, string EmployeeCode) : IRequest<Result<Unit>>;
 
     public class CommandHandler : IRequestHandler<Command, Result<Unit>>
     {
@@ -19,13 +19,14 @@ public class UserUpdate
         }
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            try {
-                
+            try
+            {
+
                 var user = await _context.GetContext().Users.SingleOrDefaultAsync(u => u.EmployeeCode == request.EmployeeCode);
-                
-                if(user == null) 
+
+                if (user == null)
                     throw new Exception("User not found");
-                
+
                 user.Section = request.LVStation;
 
                 _context.GetContext().Users.Update(user);
@@ -35,10 +36,11 @@ public class UserUpdate
                 return Result<Unit>.Success(Unit.Value);
 
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 return Result<Unit>.Failure(ex.Message);
             }
-            
+
         }
     }
 }

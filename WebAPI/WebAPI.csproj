@@ -17,9 +17,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExportReports\ExportReports.csproj" />
-    <ProjectReference Include="..\PMV\PmvApiService.Application\PmvApiService.Application.csproj" />
-    <ProjectReference Include="..\PMV\PmvApiService.Persistence\PmvApiService.Persistence.csproj" />
-    <ProjectReference Include="..\PMV\PmvApiService.Infrastructure\PmvApiService.Infrastructure.csproj" />
+    <ProjectReference Include="..\PMV\PmvApiService.Application\PMV.Application.csproj" />
+    <ProjectReference Include="..\PMV\PmvApiService.Persistence\PMV.Persistence.csproj" />
+    <ProjectReference Include="..\PMV\PmvApiService.Infrastructure\PMV.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

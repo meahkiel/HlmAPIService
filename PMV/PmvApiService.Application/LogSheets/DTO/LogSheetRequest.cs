@@ -1,4 +1,4 @@
-namespace PMV.PmvApiService.Application.LogSheets.DTO; 
+namespace PMV.Application.LogSheets.DTO;
 
 public record LogSheetOpenRequest(
     string FueledDate,

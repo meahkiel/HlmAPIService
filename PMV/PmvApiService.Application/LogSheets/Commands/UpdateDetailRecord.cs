@@ -1,10 +1,10 @@
 using MediatR;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.LogSheets.DTO;
-using PMV.PmvApiService.Core.FuelLogs;
+using PMV.Application.Interfaces;
+using PMV.Application.LogSheets.DTO;
+using PMV.Core.FuelLogs;
+using Shared.Core;
 
-namespace PMV.PmvApiService.Application.LogSheets.Commands;
+namespace PMV.Application.LogSheets.Commands;
 
 public class UpdateDetailRecord
 {
@@ -21,12 +21,13 @@ public class UpdateDetailRecord
         }
         public async Task<Result<LogSheetDetailResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
-            
-            try {
+
+            try
+            {
 
                 var logsheet = await _context.LogSheets.GetByIdAsync(Guid.Parse(request.request.LogSheetId));
-                
-                if(logsheet == null)
+
+                if (logsheet == null)
                     throw new Exception("Logsheet not found");
 
                 logsheet.UpdateDetail(
@@ -40,12 +41,13 @@ public class UpdateDetailRecord
                     request.request.TankMeterUrl);
 
                 _context.LogSheets.Update(logsheet);
-                
+
                 await _context.SaveChangesAsyncRoot();
 
                 var logDetail = logsheet.Details.FirstOrDefault() ?? new LogSheetDetail();
-                
-                return Result<LogSheetDetailResponse>.Success(new LogSheetDetailResponse {
+
+                return Result<LogSheetDetailResponse>.Success(new LogSheetDetailResponse
+                {
                     Id = logDetail.Id.ToString(),
                     AssetCode = logDetail.AssetCode,
                     FuelTime = logDetail.FuelTime,
@@ -57,7 +59,8 @@ public class UpdateDetailRecord
                 });
 
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 return Result<LogSheetDetailResponse>.Failure(ex.Message);
             }
 

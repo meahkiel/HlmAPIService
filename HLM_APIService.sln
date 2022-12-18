@@ -3,31 +3,30 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{584BB68B-2B52-4673-83F5-FE729B69E3A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{584BB68B-2B52-4673-83F5-FE729B69E3A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportReports", "ExportReports\ExportReports.csproj", "{13C7155C-1E39-4206-B487-83954A031B56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExportReports", "ExportReports\ExportReports.csproj", "{13C7155C-1E39-4206-B487-83954A031B56}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PMV", "PMV", "{7C19B444-BB7F-48E9-A731-3DDDAB1634A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PmvApiService.Core", "PMV\PmvApiService.Core\PmvApiService.Core.csproj", "{A1A49B63-EB3B-43EA-A981-966899E6C912}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMV.Core", "PMV\PmvApiService.Core\PMV.Core.csproj", "{A1A49B63-EB3B-43EA-A981-966899E6C912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PmvApiService.Application", "PMV\PmvApiService.Application\PmvApiService.Application.csproj", "{D124531A-BDF2-4D47-A8A3-654FCA3875E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMV.Application", "PMV\PmvApiService.Application\PMV.Application.csproj", "{D124531A-BDF2-4D47-A8A3-654FCA3875E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PmvApiService.Infrastructure", "PMV\PmvApiService.Infrastructure\PmvApiService.Infrastructure.csproj", "{69303C87-464A-4C53-BD7E-C920E6601EAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMV.Infrastructure", "PMV\PmvApiService.Infrastructure\PMV.Infrastructure.csproj", "{69303C87-464A-4C53-BD7E-C920E6601EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PmvApiService.Persistence", "PMV\PmvApiService.Persistence\PmvApiService.Persistence.csproj", "{D557C190-CBEB-4F2B-9AD3-4DB2E408D47F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMV.Persistence", "PMV\PmvApiService.Persistence\PMV.Persistence.csproj", "{D557C190-CBEB-4F2B-9AD3-4DB2E408D47F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMVApiService.SupportContext", "PMV\PmvApiService.SupportContext\PMVApiService.SupportContext.csproj", "{73D60FA6-B17F-4094-85DE-6749250DC128}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PMV.SupportContext", "PMV\PmvApiService.SupportContext\PMV.SupportContext.csproj", "{73D60FA6-B17F-4094-85DE-6749250DC128}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{DA206FEC-4164-4B17-8D25-1F61B61FC479}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{DA206FEC-4164-4B17-8D25-1F61B61FC479}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reports", "Reports", "{3349BDA0-D490-4E28-87EC-9A0B9B6175C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{584BB68B-2B52-4673-83F5-FE729B69E3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -63,11 +62,18 @@ Global
 		{DA206FEC-4164-4B17-8D25-1F61B61FC479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA206FEC-4164-4B17-8D25-1F61B61FC479}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{13C7155C-1E39-4206-B487-83954A031B56} = {3349BDA0-D490-4E28-87EC-9A0B9B6175C2}
 		{A1A49B63-EB3B-43EA-A981-966899E6C912} = {7C19B444-BB7F-48E9-A731-3DDDAB1634A8}
 		{D124531A-BDF2-4D47-A8A3-654FCA3875E1} = {7C19B444-BB7F-48E9-A731-3DDDAB1634A8}
 		{69303C87-464A-4C53-BD7E-C920E6601EAA} = {7C19B444-BB7F-48E9-A731-3DDDAB1634A8}
 		{D557C190-CBEB-4F2B-9AD3-4DB2E408D47F} = {7C19B444-BB7F-48E9-A731-3DDDAB1634A8}
 		{73D60FA6-B17F-4094-85DE-6749250DC128} = {7C19B444-BB7F-48E9-A731-3DDDAB1634A8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B95A7C8B-2826-4F80-AC3F-F773A395B581}
 	EndGlobalSection
 EndGlobal

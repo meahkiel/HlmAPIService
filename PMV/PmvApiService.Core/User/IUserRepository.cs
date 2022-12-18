@@ -1,7 +1,6 @@
-namespace PMV.PmvApiService.Core.User
+namespace PMV.Core.User;
+
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        Task<PMVUser> GetUserProfile(string employeeCode);
-    }
+    Task<PMVUser> GetUserProfile(string employeeCode);
 }

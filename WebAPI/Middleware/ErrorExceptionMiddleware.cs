@@ -1,6 +1,6 @@
+using PMV.Application.Common.Exceptions;
 using System.Net;
 using System.Text.Json;
-using PmvApiService.Application.Common.Exceptions;
 
 namespace WebAPI.Middleware
 {

@@ -1,10 +1,9 @@
 using MediatR;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Authentications;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.DTO.Login;
+using PMV.Application.DTO.Login;
+using PMV.Application.Interfaces;
+using Shared.Core;
 
-namespace PMV.PmvApiService.Application.Users;
+namespace PMV.Application.Users;
 
 public class UserLogin
 {
@@ -15,7 +14,7 @@ public class UserLogin
         private readonly IAuthService _service;
         private readonly IUnitWork _unitWork;
 
-        public QueryHandler(IAuthService service,IUnitWork unitWork)
+        public QueryHandler(IAuthService service, IUnitWork unitWork)
         {
             _service = service;
             _unitWork = unitWork;
@@ -24,20 +23,20 @@ public class UserLogin
 
         public async Task<Result<AuthResponse>> Handle(Query request, CancellationToken cancellationToken)
         {
-            
+
 
             var isUserLogin = await _service.Login(request.Request);
-                
-            if(!isUserLogin) 
+
+            if (!isUserLogin)
                 throw new Exception("User or Password is incorrect");
-            
+
             var user = await _unitWork.Users.GetUserProfile(request.Request.EmployeeCode);
 
-            AuthResponse response = new AuthResponse(user.EmployeeCode,user.FullName,user.Section ?? "","123456");
+            AuthResponse response = new AuthResponse(user.EmployeeCode, user.FullName, user.Section ?? "", "123456");
 
             return Result<AuthResponse>.Success(response);
 
-            
+
         }
     }
 }

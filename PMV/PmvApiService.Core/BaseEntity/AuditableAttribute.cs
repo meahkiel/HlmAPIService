@@ -1,7 +1,7 @@
-namespace PMV.PmvApiService.Core.Common.Attributes
+namespace PMV.Core.BaseEntity
 {
     public class AuditableAttribute : Attribute
     {
-        
+
     }
 }

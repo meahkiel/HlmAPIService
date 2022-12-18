@@ -1,7 +1,6 @@
-using PMV.PmvApiService.Core.BaseEntity;
+using PMV.Core.BaseEntity;
 
-
-namespace PMV.PmvApiService.Core.User
+namespace PMV.Core.User
 {
     public class PMVUser : AggregateRoot
     {

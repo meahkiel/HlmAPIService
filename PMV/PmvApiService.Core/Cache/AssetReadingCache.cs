@@ -1,4 +1,4 @@
-namespace PMV.PmvApiServicePmvApiService.Core.Cache;
+namespace PMV.Core.Cache;
 
 public class AssetReadingCache
 {

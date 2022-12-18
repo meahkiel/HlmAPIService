@@ -1,17 +1,16 @@
-namespace PmvApiService.Application.Common.Exceptions
+namespace PMV.Application.Common.Exceptions;
+
+public class CustomException : Exception
 {
-    public class CustomException : Exception
+    public int HttpStatusCode { get; private set; }
+
+    public CustomException()
     {
-        public int HttpStatusCode { get; private set; }
 
-        public CustomException()
-        {
+    }
 
-        }
-
-        public CustomException(int httpStatusCode, string message) : base(message)
-        {
-            HttpStatusCode = httpStatusCode;
-        }
+    public CustomException(int httpStatusCode, string message) : base(message)
+    {
+        HttpStatusCode = httpStatusCode;
     }
 }

@@ -1,10 +1,10 @@
 using MediatR;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.LogSheets.DTO;
-using PMV.PmvApiService.Core.FuelLogs;
+using PMV.Application.Interfaces;
+using PMV.Application.LogSheets.DTO;
+using PMV.Core.FuelLogs;
+using Shared.Core;
 
-namespace PMV.PmvApiService.Application.LogSheets.Queries
+namespace PMV.Application.LogSheets.Queries
 {
     public class GetLogsheetsByStatus
     {
@@ -19,12 +19,15 @@ namespace PMV.PmvApiService.Application.LogSheets.Queries
                 _context = context;
             }
 
-            private IEnumerable<LogSheetDetailResponse> ExtractDetail(IEnumerable<LogSheetDetail> details) {
-                
+            private IEnumerable<LogSheetDetailResponse> ExtractDetail(IEnumerable<LogSheetDetail> details)
+            {
+
                 var responses = new List<LogSheetDetailResponse>();
-                
-                foreach(var detail in details) {
-                    responses.Add(new LogSheetDetailResponse {
+
+                foreach (var detail in details)
+                {
+                    responses.Add(new LogSheetDetailResponse
+                    {
                         Id = detail.Id.ToString(),
                         AssetCode = detail.AssetCode,
                         FuelTime = detail.FuelTime,
@@ -45,8 +48,8 @@ namespace PMV.PmvApiService.Application.LogSheets.Queries
                 try
                 {
 
-                    var logSheets = (await _context.LogSheets
-                                                .GetByLVStation(request.LVStation, request.IsPosted));
+                    var logSheets = await _context.LogSheets
+                                                .GetByLVStation(request.LVStation, request.IsPosted);
 
                     if (logSheets == null)
                         throw new Exception("Logsheets not found");

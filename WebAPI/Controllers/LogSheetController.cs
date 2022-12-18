@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PMV.PmvApiService.Application.LogSheets.Commands;
-using PMV.PmvApiService.Application.LogSheets.DTO;
-using PMV.PmvApiService.Application.LogSheets.Queries;
+using PMV.Application.LogSheets.Commands;
+using PMV.Application.LogSheets.DTO;
+using PMV.Application.LogSheets.Queries;
 
 namespace WebAPI.Controllers;
 

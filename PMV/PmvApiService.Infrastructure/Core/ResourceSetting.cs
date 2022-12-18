@@ -1,4 +1,4 @@
-namespace PMV.PmvApiService.Infrastructure.Core;
+namespace PMV.Infrastructure.Core;
 
 public class ResourceSetting
 {

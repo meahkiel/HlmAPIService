@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace PmvApiService.Application.Common.Exceptions.FuelExceptions
+namespace PMV.Application.Common.Exceptions.FuelExceptions
 {
     public class ReadingException : Exception
     {
-        public ReadingException() 
+        public ReadingException()
         {
 
         }

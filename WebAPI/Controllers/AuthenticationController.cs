@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PMV.PmvApiService.Application.DTO.Login;
-using PMV.PmvApiService.Application.Users;
+using PMV.Application.DTO.Login;
+using PMV.Application.Users;
 
 namespace WebAPI.Controllers
 {

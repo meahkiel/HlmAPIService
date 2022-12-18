@@ -1,6 +1,6 @@
-using PMV.PmvApiService.Core.BaseEntity;
+using PMV.Core.BaseEntity;
 
-namespace PMV.PmvApiService.Core.Locations;
+namespace PMV.Core.Common.Locations;
 
 public class ProjectLocation : AggregateRoot
 {

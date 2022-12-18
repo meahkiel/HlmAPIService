@@ -1,24 +1,25 @@
+using PMV.SupportContext.Connections;
+using PMV.SupportContext.DTO;
 
-using PMV.PMVApiService.SupportContext.Connections;
-using PMV.PMVApiService.SupportContext.DTO;
+namespace PMV.SupportContext.Query;
 
-namespace PMV.PMVApiService.SupportContext.Query;
-
-public class UserAuthCommand : BaseQuery<AuthResult?> {
+public class UserAuthCommand : BaseQuery<AuthResult?>
+{
 
     public string EmployeeCode { get; set; } = null!;
 
-    public UserAuthCommand(SupportDataConnection connection) 
+    public UserAuthCommand(SupportDataConnection connection)
         : base(connection)
     {
-        
+
     }
 
-    public override async Task<AuthResult?> ExecuteAsync() {
+    public override async Task<AuthResult?> ExecuteAsync()
+    {
 
         string sql = "SELECT EmpCode,EmpPasswd FROM EmployeeLogin WHERE EmpCode = @empCode";
-    
-        var result = await this.GetQuerySingle(sql,new {empCode = EmployeeCode});
+
+        var result = await GetQuerySingle(sql, new { empCode = EmployeeCode });
 
         return result;
     }

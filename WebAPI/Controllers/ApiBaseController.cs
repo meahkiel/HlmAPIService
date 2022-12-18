@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PMV.PmvApiService.Application.Core;
+using Shared.Core;
 
 namespace WebAPI.Controllers
 {

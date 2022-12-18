@@ -1,11 +1,11 @@
 using System.Security.Cryptography;
 using System.Text;
-using PMV.PmvApiService.Application.Interfaces.Authentications;
-using PMV.PmvApiService.Application.DTO.Login;
-using PMV.PMVApiService.SupportContext.DTO;
-using PMV.PMVApiService.SupportContext.Query;
+using PMV.Application.DTO.Login;
+using PMV.Application.Interfaces;
+using PMV.SupportContext.DTO;
+using PMV.SupportContext.Query;
 
-namespace PMV.PmvApiService.Infrastructure.Services
+namespace PMV.Infrastructure.Services
 {
 
     /**
@@ -30,7 +30,8 @@ namespace PMV.PmvApiService.Infrastructure.Services
             if (result == null)
                 return false;
             string enc = EncodePassword(request.Password);
-            if (enc != result.EmpPasswd) {
+            if (enc != result.EmpPasswd)
+            {
                 return false;
             }
 
@@ -41,22 +42,22 @@ namespace PMV.PmvApiService.Infrastructure.Services
         public string EncodePassword(string originalPassword)
         {
             //Declarations
-            Byte[] originalBytes;
-            Byte[] encodedBytes;
+            byte[] originalBytes;
+            byte[] encodedBytes;
             MD5 md5;
 
             //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
             md5 = new MD5CryptoServiceProvider();
-            originalBytes = ASCIIEncoding.Default.GetBytes(originalPassword);
+            originalBytes = Encoding.Default.GetBytes(originalPassword);
             encodedBytes = md5.ComputeHash(originalBytes);
-            
+
             StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < encodedBytes.Length; i++)  
-            {  
+            for (int i = 0; i < encodedBytes.Length; i++)
+            {
                 //change it into 2 hexadecimal digits  
                 //for each byte  
-                builder.Append(encodedBytes[i].ToString("x2"));  
-            }  
+                builder.Append(encodedBytes[i].ToString("x2"));
+            }
 
             //Convert encoded bytes back to a ‘readable’ string
             return builder.ToString();

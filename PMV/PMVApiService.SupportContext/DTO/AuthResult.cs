@@ -1,15 +1,14 @@
-namespace PMV.PMVApiService.SupportContext.DTO
+namespace PMV.SupportContext.DTO;
+
+public class AuthResult
 {
-    public class AuthResult
+
+    public AuthResult()
     {
 
-        public AuthResult()
-        {
-           
-        }
-
-        public string EmpCode {get; set;}
-        public string EmpPasswd { get; set; }
-        
     }
+
+    public string EmpCode { get; set; }
+    public string EmpPasswd { get; set; }
+
 }

@@ -1,7 +1,7 @@
 
 using ExportReports;
-using PMV.PmvApiService.Application;
-using PMV.PmvApiService.Infrastructure;
+using PMV.Application;
+using PMV.Infrastructure;
 using WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);

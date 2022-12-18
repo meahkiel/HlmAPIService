@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using PMV.PmvApiService.Core.FuelLogs;
-using PMV.PmvApiService.Persistence.Context;
-using PmvApiService.Core.FuelLogs;
+using PMV.Core.FuelLogs;
+using PMV.Persistence.Context;
 
-namespace PMV.PmvApiService.Infrastructure.Repositories
+namespace PMV.Infrastructure.Repositories
 {
     public class LogsheetRepository : ILogSheetRepository
     {
@@ -38,7 +37,7 @@ namespace PMV.PmvApiService.Infrastructure.Repositories
 
 
 
-        public async Task<IEnumerable<LogSheet>> GetByLVStation(string lvStation,bool isPosted = false)
+        public async Task<IEnumerable<LogSheet>> GetByLVStation(string lvStation, bool isPosted = false)
         {
             return await _context.LogSheets
                             .Include(l => l.Details)
@@ -57,7 +56,7 @@ namespace PMV.PmvApiService.Infrastructure.Repositories
 
         public async Task<LogSheet?> GetSingleLogSheet(Guid id)
         {
-           return await _context.LogSheets.FindAsync(id);
+            return await _context.LogSheets.FindAsync(id);
         }
 
         public void Update(LogSheet value)

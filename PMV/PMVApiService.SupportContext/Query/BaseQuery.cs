@@ -1,7 +1,7 @@
 using Dapper;
-using PMV.PMVApiService.SupportContext.Connections;
+using PMV.SupportContext.Connections;
 
-namespace PMV.PMVApiService.SupportContext.Query;
+namespace PMV.SupportContext.Query;
 
 public abstract class BaseQuery<TResult>
 {
@@ -36,7 +36,7 @@ public abstract class BaseQuery<TResult>
         }
     }
 
-     protected async Task<TResult> GetQuerySingle(string query, object parameter)
+    protected async Task<TResult> GetQuerySingle(string query, object parameter)
     {
 
         using (var con = _connection.GetConnection())
@@ -44,7 +44,7 @@ public abstract class BaseQuery<TResult>
             con.Open();
             var result = await con.QuerySingleAsync<TResult>(query, parameter);
             con.Close();
-            
+
             return result;
         }
     }
@@ -52,5 +52,5 @@ public abstract class BaseQuery<TResult>
 
     public abstract Task<TResult> ExecuteAsync();
 
-    
+
 }

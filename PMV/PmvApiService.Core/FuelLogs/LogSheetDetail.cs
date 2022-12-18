@@ -1,7 +1,6 @@
+using PMV.Core.BaseEntity;
 
-using PMV.PmvApiService.Core.BaseEntity;
-
-namespace PMV.PmvApiService.Core.FuelLogs;
+namespace PMV.Core.FuelLogs;
 
 public class LogSheetDetail : Entity
 {

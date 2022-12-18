@@ -1,10 +1,10 @@
 using MediatR;
-using PMV.PmvApiService.Core.FuelLogs;
-using PMV.PmvApiService.Application.Interfaces.Repositories;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Application.LogSheets.DTO;
+using Shared.Core;
+using PMV.Application.Interfaces;
+using PMV.Application.LogSheets.DTO;
+using PMV.Core.FuelLogs;
 
-namespace PMV.PmvApiService.Application.LogSheets.Commands;
+namespace PMV.Application.LogSheets.Commands;
 
 public class ClosingRecord
 {
@@ -40,7 +40,8 @@ public class ClosingRecord
                 return Result<Unit>.Success(Unit.Value);
 
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return Result<Unit>.Failure(ex.Message);
             }
         }
@@ -53,8 +54,8 @@ public class ClosingRecord
 
             if (logsheet == null)
                 throw new Exception("Log sheet not found");
-            
-            if(logsheet.Post.IsPosted)
+
+            if (logsheet.Post.IsPosted)
                 throw new Exception("Log sheet is posted already");
 
             return logsheet;

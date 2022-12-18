@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using PMV.PmvApiService.Application.Interfaces;
-using PMV.PmvApiService.Application.Core;
-using PMV.PmvApiService.Infrastructure.Core;
+using PMV.Application.Core;
+using PMV.Application.Interfaces;
+using PMV.Infrastructure.Core;
 
-namespace PMV.PmvApiService.Infrastructure.Services;
+namespace PMV.Infrastructure.Services;
 
 public class ImageAccessor : IImageAccessor
 {
@@ -18,48 +18,53 @@ public class ImageAccessor : IImageAccessor
         _urlBasePath = options.Value.UrlBasePath;
     }
 
-     private string CreateFilePath(IFormFile formFile, FileInfo fileInfo,string lvStation,string assetCode,string classification, out string formatFileName) {
+    private string CreateFilePath(IFormFile formFile, FileInfo fileInfo, string lvStation, string assetCode, string classification, out string formatFileName)
+    {
 
         var folderPerDate = $"Galleries_{DateTime.Today.ToShortDateString()}";
         string destinationPath = _basePath + folderPerDate;
-        
+
         formatFileName = $"{lvStation}_{assetCode}_{classification}_{Guid.NewGuid().ToString()}{fileInfo.Extension}";
-        
+
         if (!Directory.Exists(destinationPath))
         {
             var info = Directory.CreateDirectory(_basePath + folderPerDate);
         }
 
-        return Path.Combine(destinationPath, formatFileName); 
+        return Path.Combine(destinationPath, formatFileName);
     }
 
-    private string CreateFilePath(string extension,string lvStation,string assetCode,string classification, out string formatFileName) {
+    private string CreateFilePath(string extension, string lvStation, string assetCode, string classification, out string formatFileName)
+    {
 
         var folderPerDate = $"Galleries_{DateTime.Today.ToShortDateString()}";
         string destinationPath = _basePath + folderPerDate;
-        
+
         formatFileName = $"{lvStation}_{assetCode}_{classification}_{Guid.NewGuid().ToString()}{extension}";
-        
+
         if (!Directory.Exists(destinationPath))
         {
             var info = Directory.CreateDirectory(_basePath + folderPerDate);
         }
 
-        return Path.Combine(destinationPath, formatFileName); 
+        return Path.Combine(destinationPath, formatFileName);
     }
 
-    
 
-    public async Task<PhotoResult> SavePhoto(IFormFile file,string lvStation,string assetCode,string classification) {
-        
+
+    public async Task<PhotoResult> SavePhoto(IFormFile file, string lvStation, string assetCode, string classification)
+    {
+
         FileInfo fileInfo = new FileInfo(file.FileName);
-        string filePath = CreateFilePath(file,fileInfo,lvStation,assetCode,classification, out string formatFileName);
-        
-        using(var fileStream = new FileStream(filePath,FileMode.Create)) {
+        string filePath = CreateFilePath(file, fileInfo, lvStation, assetCode, classification, out string formatFileName);
+
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
             await file.CopyToAsync(fileStream);
         }
 
-        return new PhotoResult {
+        return new PhotoResult
+        {
             Name = file.FileName,
             PhysicalPath = filePath,
             FileName = formatFileName,
@@ -68,15 +73,17 @@ public class ImageAccessor : IImageAccessor
         };
     }
 
-    public PhotoResult SaveBinaryPhoto(byte[]? fileData,string fileName, string lvStation, string assetCode, string classification)
+    public PhotoResult SaveBinaryPhoto(byte[]? fileData, string fileName, string lvStation, string assetCode, string classification)
     {
-        string filePath = CreateFilePath(".png",lvStation,assetCode,classification, out string formatFileName);
+        string filePath = CreateFilePath(".png", lvStation, assetCode, classification, out string formatFileName);
 
-        using(var fileStream = new FileStream(filePath,FileMode.Create)) {
-            fileStream.Write(fileData!,0,fileData!.Length);
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            fileStream.Write(fileData!, 0, fileData!.Length);
         }
 
-        return new PhotoResult {
+        return new PhotoResult
+        {
             Name = fileName,
             PhysicalPath = filePath,
             FileName = formatFileName,
@@ -85,9 +92,10 @@ public class ImageAccessor : IImageAccessor
         };
     }
 
-    public PhotoResult UploadedFromSharepoint(string fileName,string classification)
+    public PhotoResult UploadedFromSharepoint(string fileName, string classification)
     {
-        return new PhotoResult {
+        return new PhotoResult
+        {
             Name = classification,
             FileName = fileName,
             Classification = classification,

@@ -1,12 +1,13 @@
+using PMV.Core.BaseEntity;
+using PMV.Core.Common.ValueObjects;
+using PMV.Core.FuelStations;
 
-using PMV.PmvApiService.Core.BaseEntity;
-using PMV.PmvApiService.Core.Common.ValueObjects;
-using PMV.PmvApiService.Core.LVStations;
-
-namespace PMV.PmvApiService.Core.FuelLogs;
+namespace PMV.Core.FuelLogs;
 
 public class LogSheet : AggregateRoot
 {
+
+   
     public int ReferenceNo { get; set; }
     public DateTime FueledDate { get; set; } = DateTime.Now;
     public DateTime ShiftStartTime { get; set; }
@@ -67,7 +68,7 @@ public class LogSheet : AggregateRoot
     }
 
 
-    public static LogSheet Create(
+    public static LogSheet CreateNewLog(
         int refNo,
         DateTime shiftStartTime,
         int startShiftTankerKm,
@@ -75,6 +76,7 @@ public class LogSheet : AggregateRoot
         string location,
         LVStation lvStation)
     {
+        
 
         return new LogSheet
         {
